@@ -50,7 +50,6 @@
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.cbeName = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.cbeStatus = new System.Windows.Forms.ComboBox();
@@ -65,6 +64,8 @@
             this.cValue = new System.Windows.Forms.CheckBox();
             this.cHangSanXuat = new System.Windows.Forms.CheckBox();
             this.cStatus = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,7 +175,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(347, 30);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(853, 516);
+            this.dataGridView1.Size = new System.Drawing.Size(853, 558);
             this.dataGridView1.TabIndex = 10;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellClick);
             // 
@@ -246,7 +247,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 377);
+            this.label6.Location = new System.Drawing.Point(16, 419);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(81, 13);
             this.label6.TabIndex = 13;
@@ -257,7 +258,7 @@
             this.cbeValue.DisplayMember = "ID";
             this.cbeValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbeValue.FormattingEnabled = true;
-            this.cbeValue.Location = new System.Drawing.Point(127, 374);
+            this.cbeValue.Location = new System.Drawing.Point(127, 416);
             this.cbeValue.Name = "cbeValue";
             this.cbeValue.Size = new System.Drawing.Size(170, 21);
             this.cbeValue.TabIndex = 12;
@@ -279,7 +280,7 @@
             // rExport
             // 
             this.rExport.AutoSize = true;
-            this.rExport.Location = new System.Drawing.Point(15, 317);
+            this.rExport.Location = new System.Drawing.Point(15, 359);
             this.rExport.Name = "rExport";
             this.rExport.Size = new System.Drawing.Size(47, 17);
             this.rExport.TabIndex = 15;
@@ -289,7 +290,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 342);
+            this.label7.Location = new System.Drawing.Point(12, 384);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 16;
@@ -297,7 +298,7 @@
             // 
             // tbQuantity
             // 
-            this.tbQuantity.Location = new System.Drawing.Point(127, 483);
+            this.tbQuantity.Location = new System.Drawing.Point(127, 525);
             this.tbQuantity.Name = "tbQuantity";
             this.tbQuantity.Size = new System.Drawing.Size(192, 20);
             this.tbQuantity.TabIndex = 21;
@@ -306,7 +307,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(38, 486);
+            this.label9.Location = new System.Drawing.Point(38, 528);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(59, 13);
             this.label9.TabIndex = 20;
@@ -315,7 +316,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(228, 523);
+            this.btnExport.Location = new System.Drawing.Point(228, 565);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(91, 23);
             this.btnExport.TabIndex = 22;
@@ -323,21 +324,11 @@
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.BtnExport_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(127, 523);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(91, 23);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Lưu";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.Button2_Click);
-            // 
             // cbeName
             // 
             this.cbeName.DisplayMember = "NAME";
             this.cbeName.FormattingEnabled = true;
-            this.cbeName.Location = new System.Drawing.Point(127, 339);
+            this.cbeName.Location = new System.Drawing.Point(127, 381);
             this.cbeName.Name = "cbeName";
             this.cbeName.Size = new System.Drawing.Size(170, 21);
             this.cbeName.TabIndex = 24;
@@ -346,7 +337,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(29, 448);
+            this.label8.Location = new System.Drawing.Point(29, 490);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 13);
             this.label8.TabIndex = 26;
@@ -357,7 +348,7 @@
             this.cbeStatus.DisplayMember = "ID";
             this.cbeStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbeStatus.FormattingEnabled = true;
-            this.cbeStatus.Location = new System.Drawing.Point(127, 445);
+            this.cbeStatus.Location = new System.Drawing.Point(127, 487);
             this.cbeStatus.Name = "cbeStatus";
             this.cbeStatus.Size = new System.Drawing.Size(170, 21);
             this.cbeStatus.TabIndex = 25;
@@ -368,7 +359,7 @@
             this.cbeManufacturer.DisplayMember = "ID";
             this.cbeManufacturer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbeManufacturer.FormattingEnabled = true;
-            this.cbeManufacturer.Location = new System.Drawing.Point(127, 409);
+            this.cbeManufacturer.Location = new System.Drawing.Point(127, 451);
             this.cbeManufacturer.Name = "cbeManufacturer";
             this.cbeManufacturer.Size = new System.Drawing.Size(170, 21);
             this.cbeManufacturer.TabIndex = 27;
@@ -377,7 +368,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 412);
+            this.label10.Location = new System.Drawing.Point(8, 454);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 13);
             this.label10.TabIndex = 28;
@@ -436,7 +427,7 @@
             // cName
             // 
             this.cName.AutoSize = true;
-            this.cName.Location = new System.Drawing.Point(303, 342);
+            this.cName.Location = new System.Drawing.Point(303, 387);
             this.cName.Name = "cName";
             this.cName.Size = new System.Drawing.Size(15, 14);
             this.cName.TabIndex = 34;
@@ -446,7 +437,7 @@
             // cValue
             // 
             this.cValue.AutoSize = true;
-            this.cValue.Location = new System.Drawing.Point(303, 377);
+            this.cValue.Location = new System.Drawing.Point(303, 422);
             this.cValue.Name = "cValue";
             this.cValue.Size = new System.Drawing.Size(15, 14);
             this.cValue.TabIndex = 35;
@@ -456,7 +447,7 @@
             // cHangSanXuat
             // 
             this.cHangSanXuat.AutoSize = true;
-            this.cHangSanXuat.Location = new System.Drawing.Point(303, 412);
+            this.cHangSanXuat.Location = new System.Drawing.Point(303, 457);
             this.cHangSanXuat.Name = "cHangSanXuat";
             this.cHangSanXuat.Size = new System.Drawing.Size(15, 14);
             this.cHangSanXuat.TabIndex = 36;
@@ -466,18 +457,39 @@
             // cStatus
             // 
             this.cStatus.AutoSize = true;
-            this.cStatus.Location = new System.Drawing.Point(303, 448);
+            this.cStatus.Location = new System.Drawing.Point(303, 493);
             this.cStatus.Name = "cStatus";
             this.cStatus.Size = new System.Drawing.Size(15, 14);
             this.cStatus.TabIndex = 37;
             this.cStatus.UseVisualStyleBackColor = true;
             this.cStatus.CheckedChanged += new System.EventHandler(this.CStatus_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(127, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(191, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "Nhập Excel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(127, 565);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(91, 23);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "Lưu";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 569);
+            this.ClientSize = new System.Drawing.Size(1234, 621);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.cStatus);
             this.Controls.Add(this.cHangSanXuat);
             this.Controls.Add(this.cValue);
@@ -544,7 +556,6 @@
         private System.Windows.Forms.TextBox tbQuantity;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnExport;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ComboBox cbeName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbeStatus;
@@ -566,6 +577,8 @@
         private System.Windows.Forms.CheckBox cValue;
         private System.Windows.Forms.CheckBox cHangSanXuat;
         private System.Windows.Forms.CheckBox cStatus;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

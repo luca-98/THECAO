@@ -34,3 +34,4 @@ C:\Users\PC\Documents\GitHub\THECAO\THECAO\THECAOTOOL\obj\Debug\THECAOTOOL.cspro
 C:\Users\PC\Documents\GitHub\THECAO\THECAO\THECAOTOOL\obj\Debug\THECAOTOOL.csproj.CopyComplete
 C:\Users\PC\Documents\GitHub\THECAO\THECAO\THECAOTOOL\obj\Debug\THECAOTOOL.exe
 C:\Users\PC\Documents\GitHub\THECAO\THECAO\THECAOTOOL\obj\Debug\THECAOTOOL.pdb
+C:\Users\PC\Documents\GitHub\THECAO\THECAO\THECAOTOOL\obj\Debug\THECAOTOOL.csproj.ResolveComReference.cache

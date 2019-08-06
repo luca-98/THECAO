@@ -10,14 +10,17 @@ using System.Windows.Forms;
 using System.Net.Configuration;
 using System.Configuration;
 using System.Data.SqlClient;
-
+using Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 namespace THECAOTOOL {
     public partial class Form1 : Form {
         string strConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["THECAOTOOL.Properties.Settings.THECAOConnectionString"].ToString();
         SqlConnection con;
-        DataTable dtValue;
-        DataTable dtManufacturer;
-        DataTable dtStatus;
+        System.Data.DataTable dtValue;
+        System.Data.DataTable dtManufacturer;
+        System.Data.DataTable dtStatus;
         string currentID;
         int numrow;
         string filterSql;
@@ -42,7 +45,7 @@ namespace THECAOTOOL {
 
         }
         private void loadDataValue() {
-            dtValue = new DataTable();
+            dtValue = new System.Data.DataTable();
             con.Open();
             try {
                 SqlDataAdapter da = new SqlDataAdapter("Select * From MENHGIA",con);
@@ -67,7 +70,7 @@ namespace THECAOTOOL {
             }
         }
         private void loadManufacturer() {
-            dtManufacturer = new DataTable();
+            dtManufacturer = new System.Data.DataTable();
             con.Open();
             try {
                 SqlDataAdapter da = new SqlDataAdapter("Select * From HANGSANXUAT",con);
@@ -92,7 +95,7 @@ namespace THECAOTOOL {
             }
         }
         private void loadStatus() {
-            dtStatus = new DataTable();
+            dtStatus = new System.Data.DataTable();
             con.Open();
             try {
                 SqlDataAdapter da = new SqlDataAdapter("Select * From TRANGTHAI",con);
@@ -116,7 +119,7 @@ namespace THECAOTOOL {
             }
         }
         private void loadName() {
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             con.Open();
             try {
                 SqlDataAdapter da = new SqlDataAdapter("Select DISTINCT  MAIN.NAME From MAIN",con);
@@ -131,7 +134,7 @@ namespace THECAOTOOL {
             try {
                 cbeName.DataSource = dt;
                 cbeName.DisplayMember = "NAME";
-    
+
             } catch (Exception ex) {
                 MessageBox.Show("Có lỗi khi load dữ liệu!\n",ex.ToString());
             }
@@ -143,7 +146,7 @@ namespace THECAOTOOL {
                                           + "MENHGIA ON MAIN.MENHGIA = MENHGIA.ID  JOIN "
                                           + "TRANGTHAI ON MAIN.TRANGTHAI = TRANGTHAI.ID ;",con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
         }
@@ -174,7 +177,7 @@ namespace THECAOTOOL {
                 loadStatus();
                 loadName();
             }
-          
+
         }
         void handleImportExport(bool status) {
             btnExport.Enabled = status;
@@ -252,7 +255,34 @@ namespace THECAOTOOL {
 
 
         private void Button2_Click(object sender,EventArgs e) {
-            MessageBox.Show("Updating... \n liên hệ : 0566662225 để được update sớm nhất");
+            // creating Excel Application  
+            Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+            // creating new WorkBook within Excel application  
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+            // creating new Excelsheet in workbook  
+            Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+            // see the excel sheet behind the program  
+            app.Visible = true;
+            // get the reference of first sheet. By default its name is Sheet1.  
+            // store its reference to worksheet  
+            worksheet = workbook.Sheets["Sheet1"];
+            worksheet = workbook.ActiveSheet;
+            // changing the name of active sheet  
+            worksheet.Name = "1";
+            // storing header part in Excel  
+            for (int i = 1; i < dataGridView1.Columns.Count + 1; i++) {
+                worksheet.Cells[1,i] = dataGridView1.Columns[i - 1].HeaderText;
+            }
+            // storing Each row and column value to excel sheet  
+            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++) {
+                for (int j = 0; j < dataGridView1.Columns.Count; j++) {
+                    worksheet.Cells[i + 2,j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                }
+            }
+            // save the application  
+            workbook.SaveAs("output.xls",Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive);
+            // Exit from the application  
+            //app.Quit();
         }
 
         private void DataGridView1_CellClick(object sender,DataGridViewCellEventArgs e) {
@@ -295,7 +325,7 @@ namespace THECAOTOOL {
                 cbeStatus.Enabled = false;
 
             }
-           
+
         }
 
         private void CHangSanXuat_CheckedChanged(object sender,EventArgs e) {
@@ -362,9 +392,82 @@ namespace THECAOTOOL {
             }
             SqlCommand cmd = new SqlCommand(filterSql,con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
+            System.Data.DataTable dt = new System.Data.DataTable();
             da.Fill(dt);
             dataGridView1.DataSource = dt;
+
+        }
+
+        private void Button1_Click(object sender,EventArgs e) {
+            string name = tbiName.Text;
+            string nhaSanXuat = cbiManufacturer.SelectedValue.ToString();
+            string menhGia = cbiValue.SelectedValue.ToString();
+            string ngayNhap = diDate.Value.ToShortDateString();
+            string trangthai = cbiStatus.SelectedValue.ToString();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog {
+                InitialDirectory = @"D:\",
+                Title = "Browse Text Files",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "xlsx",
+                Filter = "xlsx files (*.xlsx)|*.xlsx",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
+
+                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook xlWorkbook = xlApp.Workbooks.Open(openFileDialog1.FileName);
+                Microsoft.Office.Interop.Excel._Worksheet xlWorksheet = xlWorkbook.Sheets[1];
+                Microsoft.Office.Interop.Excel.Range xlRange = xlWorksheet.UsedRange;
+
+                int rowCount = xlRange.Rows.Count;
+                int colCount = xlRange.Columns.Count;
+                string id = "";
+                string seri = "";
+                con.Open();
+                try {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    for (int i = 1; i <= rowCount; i++) {
+                        id = xlRange.Cells[i,1].Value2.ToString();
+                        seri = xlRange.Cells[i,2].Value2.ToString();
+                        string sql = sql = "insert into Main (ID,NAME,SERI,NHASANXUAT,MENHGIA,NGAYNHAP,TRANGTHAI) values(N'" + id + "',N'" + name + "',N'" + seri + "'," + nhaSanXuat + "," + menhGia + ",CAST(N'" + ngayNhap + "' AS Date)," + trangthai + ")";
+                        adapter.InsertCommand = new SqlCommand(sql,con);
+                        adapter.InsertCommand.ExecuteNonQuery();
+                    }
+
+
+                    MessageBox.Show("thanh cong");
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.ToString());
+                } finally {
+                    con.Close();
+                    //cleanup  
+                    loadDataGridView();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    Marshal.ReleaseComObject(xlRange);
+                    Marshal.ReleaseComObject(xlWorksheet);
+
+                    //close and release  
+                    xlWorkbook.Close();
+                    Marshal.ReleaseComObject(xlWorkbook);
+
+                    //quit and release  
+                    xlApp.Quit();
+                    Marshal.ReleaseComObject(xlApp);
+                }
+
+
+
+
+            }
 
         }
     }
